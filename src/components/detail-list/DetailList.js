@@ -34,22 +34,21 @@ class DetailList extends React.Component {
         });
     }
 
-    handleRemoveDetail(index) {
+    handleRemoveDetail(detailToRemove) {
         this.setState((currentState) => {
             return {
-                details: currentState.details.filter((detail, detailIndex) => {
-                    return detailIndex !== index;
+                details: currentState.details.filter((detail) => {
+                    return detailToRemove !== detail;
                 })
             };
         });
     }
 
     render() {
-
         return (
             <div className="ui unstackable items">
                 {this.state.details.map((detail, index) => (
-                    <Detail key={index} detail={detail} />
+                    <Detail key={index} detail={detail}  />
                 ))}
             </div>
         );
