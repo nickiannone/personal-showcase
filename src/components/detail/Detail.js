@@ -16,36 +16,43 @@ import React from 'react';
 // };
 
 class Detail extends React.Component {
+    constructor(props) {
+        super(props);
+
+        //console.log(JSON.stringify(props));
+
+        this.state = {
+            detail: props.detail
+        };
+    }
+
     render() {
-        // Defensive coding - a smell?
-        if (!this.props.item) {
+        const detail = this.state.detail;
+
+        if (detail) {
+            return (
+                <div className="detail">
+                    <h1>{detail.name}</h1>
+                    <p>Start Date: {detail.start_date}</p>
+                    <p>End Date: {detail.end_date}</p>
+                    <p>Location: {detail.location}</p>
+                    <p>Description: {detail.description}</p>
+                    <p>Skills:
+                        <ul>
+                            {detail.skills?.map((skill, index) => (
+                                <li key={index}>{skill}</li>
+                            ))}
+                        </ul>
+                    </p>
+                </div>
+            );
+        } else {
             return (
                 <div className="detail">
                     <i>Loading...</i>
                 </div>
             );
         }
-
-        const item = this.props.item;
-
-        const skillsEntries = item.skills.map((skill, index) => (
-            <li key={index}>{skill}</li>
-        ));
-
-        return (
-            <div className="detail">
-                <h1>{item.name}</h1>
-                <p>Start Date: {item.start_date}</p>
-                <p>End Date: {item.end_date}</p>
-                <p>Location: {item.location}</p>
-                <p>Description: {item.description}</p>
-                <p>Skills:
-                    <ul>
-                        {skillsEntries}
-                    </ul>
-                </p>
-            </div>
-        );
     }
 }
 

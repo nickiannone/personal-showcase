@@ -7,8 +7,8 @@ it('renders without crashing', () => {
     shallow(<Detail />);
 });
 
-it('renders a Workplace', () => {
-    const item = {
+it('renders a Workplace Detail component', () => {
+    const detail = {
         type: 'workplace',
         name: 'EmOpti LLC',
         start_date: '06-2021',
@@ -23,7 +23,7 @@ it('renders a Workplace', () => {
         ]
     };
 
-    const wrapper = shallow(<Detail item={item}/>);
+    const wrapper = shallow(<Detail detail={detail}/>);
 
     expect(wrapper.contains("EmOpti LLC")).toBeTruthy();
     expect(wrapper.contains("06-2021")).toBeTruthy();

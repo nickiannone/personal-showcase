@@ -7,7 +7,7 @@ it('renders without crashing', () => {
 });
 
 it('should display a list of details', () => {
-    const items = [
+    const details = [
         {
             type: 'workplace',
             name: 'EmOpti LLC',
@@ -21,10 +21,31 @@ it('should display a list of details', () => {
                 'Testing',
                 'Healthcare'
             ]
+        },
+        {
+            type: 'workplace',
+            name: 'Northwestern Mutual',
+            start_date: '04-2019',
+            end_date: '06-2021',
+            location: 'Milwaukee, WI',
+            description: 'Test 2',
+            skills: [
+                'Spring Boot',
+                'Angular',
+                'Java',
+                'Microservices',
+                'Python',
+                'AWS',
+                'Terraform',
+                'Insurance'
+            ]
         }
     ];
 
-    const wrapper = render(<DetailList items={items} />);
+    const wrapper = render(<DetailList details={details} />);
+
+    console.log("Rendered DetailList: " + wrapper.html());
+
 
     // Wrapper should have one and only one element
 });
