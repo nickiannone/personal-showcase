@@ -10,6 +10,7 @@ it('should display a list of details', () => {
     const details = [
         {
             type: 'workplace',
+            id: 1,
             name: 'EmOpti LLC',
             start_date: '06-2021',
             end_date: '09-2021',
@@ -24,6 +25,7 @@ it('should display a list of details', () => {
         },
         {
             type: 'workplace',
+            id: 2,
             name: 'Northwestern Mutual',
             start_date: '04-2019',
             end_date: '06-2021',
@@ -46,6 +48,6 @@ it('should display a list of details', () => {
 
     console.log("Rendered DetailList: " + wrapper.html());
 
-
-    // Wrapper should have one and only one element
+    expect(wrapper.html().includes("EmOpti LLC")).toBeTruthy();
+    expect(wrapper.html().includes("Northwestern Mutual")).toBeTruthy();
 });

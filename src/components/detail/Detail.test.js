@@ -10,6 +10,7 @@ it('renders without crashing', () => {
 it('renders a Workplace Detail component', () => {
     const detail = {
         type: 'workplace',
+        id: 1,
         name: 'EmOpti LLC',
         start_date: '06-2021',
         end_date: '09-2021',

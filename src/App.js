@@ -12,6 +12,7 @@ class App extends React.Component {
       details: [
 		{
 			type: 'workplace',
+			id: 1,
 			name: 'EmOpti LLC',
 			start_date: '06-2021',
 			end_date: '09-2021',
@@ -26,6 +27,7 @@ class App extends React.Component {
 		},
 		{
 			type: 'workplace',
+			id: 2,
 			name: 'Northwestern Mutual',
 			start_date: '04-2019',
 			end_date: '06-2021',
