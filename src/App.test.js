@@ -2,7 +2,8 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import App from './App';
 
-it('should display "Hello, Nick!" after entering name', () => {
+// OBSOLETE
+xit('should display "Hello, Nick!" after entering name', () => {
   const { getByText, getByLabelText } = render(<App />);
 
   const nameInput = getByLabelText(/name/i);
