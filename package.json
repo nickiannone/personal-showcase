@@ -11,6 +11,7 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.0.1",
     "react-scripts": "4.0.3",
+    "rxjs": "^7.4.0",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
@@ -41,6 +42,7 @@
     "@testing-library/react": "^11.2.7",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.5",
     "enzyme": "^3.11.0",
+    "jest-mock-axios": "^4.4.1",
     "react": "^17.0.2",
     "react-test-renderer": "^17.0.2"
   }

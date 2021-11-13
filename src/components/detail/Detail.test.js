@@ -1,10 +1,10 @@
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import '@testing-library/jest-dom';
-import { shallow } from 'enzyme';
+
 import Detail from './Detail.js';
 
 it('renders without crashing', () => {
-    shallow(<Detail />);
+    render(<Detail />);
 });
 
 it('renders a Workplace Detail component', () => {
@@ -24,16 +24,16 @@ it('renders a Workplace Detail component', () => {
         ]
     };
 
-    const wrapper = shallow(<Detail detail={detail}/>);
+    render(<Detail detail={detail}/>);
 
-    expect(wrapper.contains("EmOpti LLC")).toBeTruthy();
-    expect(wrapper.contains("06-2021")).toBeTruthy();
-    expect(wrapper.contains("09-2021")).toBeTruthy();
-    expect(wrapper.contains("Brookfield, WI")).toBeTruthy();
-    expect(wrapper.contains("Test")).toBeTruthy();
-    expect(wrapper.contains("Spring Boot")).toBeTruthy();
-    expect(wrapper.contains("Angular")).toBeTruthy();
-    expect(wrapper.contains("Testing")).toBeTruthy();
-    expect(wrapper.contains("Healthcare")).toBeTruthy();
+    expect(screen.findByText("EmOpti LLC")).toBeTruthy();
+    expect(screen.findByText("06-2021")).toBeTruthy();
+    expect(screen.findByText("09-2021")).toBeTruthy();
+    expect(screen.findByText("Brookfield, WI")).toBeTruthy();
+    expect(screen.findByText("Test")).toBeTruthy();
+    expect(screen.findByText("Spring Boot")).toBeTruthy();
+    expect(screen.findByText("Angular")).toBeTruthy();
+    expect(screen.findByText("Testing")).toBeTruthy();
+    expect(screen.findByText("Healthcare")).toBeTruthy();
 });
 

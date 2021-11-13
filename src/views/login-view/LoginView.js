@@ -1,26 +1,26 @@
 import React from 'react';
-import { withContext } from "../../AppContext";
 
 class LoginView extends React.Component {
-    
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            loading: false,
+            message: ""
         };
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
-        this.props.login(this.state.email, this.state.password)
-            .then(() => this.props.history.push("/profile"));
+    onChangeEmail(e) {
+        this.setState({
+            email: e.target.value
+        });
     }
 
-    handleChange(event) {
-        const { name, value } = e.target;
+    onChangePassword(e) {
         this.setState({
-            [name]: value
+            password: e.target.value
         });
     }
 
@@ -31,21 +31,47 @@ class LoginView extends React.Component {
         });
     }
 
+    handleLogin(e) {
+        e.preventDefault();
+
+        this.setState({
+            message: "",
+            loading: true
+        });
+
+        // TODO this.form.validateAll();
+
+        this.login(this.state.email, this.state.password).then(() => {
+            this.props.history.push("/profile");
+            window.location.reload();
+        }, error => {
+            this.setState({
+                loading: false,
+                message: error?.response?.data?.message
+            });
+        });
+    }
+
     render() {
         return (
             <div className="Login">
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleLogin}>
                     <h3>Login</h3>
-                    <input onChange={this.handleChange}
-                           value={this.state.email}
-                           name="email"
-                           type="text"
-                           placeholder="Email Address" />
-                    <input onChange={this.handleChange}
-                           value={this.state.password}
-                           name="password"
-                           type="password"
-                           placeholder="Password" />
+                    <label for="email">Email Address</label>
+                    <input onChange={this.onChangeEmail}
+                            id="email"
+                            value={this.state.email}
+                            name="email"
+                            type="email"
+                            placeholder="Email Address" />
+                    <label for="password">Password</label>
+                    <input onChange={this.onChangePassword}
+                            value={this.state.password}
+                            id="password"
+                            name="password"
+                            type="password"
+                            placeholder="Password" />
+                    <button type="reset" onClick={this.clearInputs}>Reset</button>
                     <button type="submit">Submit</button>
                 </form>
             </div>
@@ -53,4 +79,4 @@ class LoginView extends React.Component {
     }
 }
 
-export default withContext(LoginView);
+export default LoginView;
