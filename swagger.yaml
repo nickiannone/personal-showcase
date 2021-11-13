@@ -1,0 +1,168 @@
+swagger: "2.0"
+info:
+  description: "This is a specification for the Personal Showcase API server."
+  version: "0.1.0"
+  title: "Personal Showcase API"
+  contact:
+    email: "nickiannone@gmail.com"
+host: "localhost:1337"
+basePath: "/"
+tags:
+- name: "auth"
+  description: "Authentication"
+- name: "user"
+  description: "User accounts (protected)"
+- name: "profile"
+  description: "User Profiles"
+- name: "overview"
+  description: "Profile Overviews"
+- name: "workplace"
+  description: "Workplaces"
+- name: "education"
+  description: "Education"
+- name: "hobby"
+  description: "Hobbies"
+- name: "project"
+  description: "Projects"
+- name: "contact"
+  description: "Contact Information"
+- name: "links"
+  description: "External Links"
+schemes:
+- "https"
+paths:
+  /auth/local:
+    post:
+      tags:
+      - "auth"
+      summary: "Authenticate and log in"
+      description: "Authenticates a user principal and provides a JWT token"
+      operationId: "login"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "principal"
+        description: "Identifier and password used to log in"
+        required: true
+        schema:
+          $ref: "#/definitions/LoginRequest"
+      responses:
+        "200":
+          description: "Successfully authenticated"
+          schema:
+            $ref: "#/definitions/LoginResponse"
+        "400":
+          description: "Invalid input supplied"
+        "403":
+          description: "Unable to log in using the provided credentials"
+        "404":
+          description: "User not found"
+        "500":
+          description: "API error"
+  /auth/local/signup:
+    post:
+      tags:
+      - auth
+      summary: "Register a new user account"
+      description: "Registers a new user and provides a JWT token"
+      operationId: "register"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "principal"
+        description: "Username, email, and password for the new user"
+        required: true
+        schema:
+          $ref: "#/definitions/SignupRequest"
+      responses:
+        "200":
+          description: "Successfully registered"
+          schema:
+            $ref: "#/definitions/LoginResponse"
+        "400":
+          description: "Invalid input supplied"
+        "401":
+          description: "Username/email already registered"
+        "403":
+          description: "Unable to sign up using the provided credentials"
+        "500":
+          description: "API error"
+securityDefinitions:
+definitions:
+  LoginRequest:
+    type: "object"
+    properties:
+      identifier:
+        type: "string"
+        format: "email"
+      password:
+        type: "string"
+        format: "password"
+  LoginResponse:
+    type: "object"
+    properties:
+      jwt:
+        type: "string"
+        description: "JWT bearer token"
+      user:
+        $ref: "#/definitions/User"
+  SignupRequest:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+        description: "The username for the new user"
+      email:
+        type: "string"
+        format: "email"
+        description: "The new user's email address"
+      password:
+        type: "string"
+        format: "password"
+        description: "The new user's password"
+  SignupResponse:
+    type: "object"
+    properties:
+      jwt:
+        type: "string"
+        description: "JWT bearer token"
+      user:
+        $ref: "#/definitions/User"
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int32"
+      username:
+        type: "string"
+      email:
+        type: "string"
+        format: "email"
+      provider:
+        type: "string"
+        description: "The provider of the authenticated user response"
+      confirmed:
+        type: "boolean"
+        description: "Whether the user account has been confirmed"
+      blocked:
+        type: "boolean"
+        description: "Whether the user account has been blocked"
+      created_at:
+        type: "string"
+        format: "date-time"
+        description: "When the user was created"
+      updated_at:
+        type: "string"
+        format: "date-time"
+        description: "When the user was last updated"
+      published_at:
+        type: "string"
+        format: "date-time"
+        description: "When the user was first published"
