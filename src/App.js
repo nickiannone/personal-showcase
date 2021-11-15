@@ -1,8 +1,8 @@
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React from 'react';
 import './App.css';
-import PrivateRoute from './routing/private-route/PrivateRoute';
 import LoginView from './views/login-view/LoginView';
+import PrivateRoute from './routing/PrivateRoute';
 
 const RegisterView = () => {
 	return <h1>TODO Registration Page</h1>;
@@ -42,16 +42,18 @@ class App extends React.Component {
 
   render() {
     return (
-		<Routes>
-			<Route path="/" component={<LandingView />} />
-			<Route path="/login" component={<LoginView />} />
-			<Route path="/register" component={<RegisterView />} />
-			<Route path="/forgot-password" component={<ForgotPasswordView />} />
-			<PrivateRoute path="/profile/:profileId" component={<ProfileView />}>
-				<PrivateRoute path="edit" component={<EditorView />} />
-			</PrivateRoute>
-			<Route path="*" element={<NotFoundView />} />
-		</Routes>
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" component={<LandingView />} />
+				<Route path="/login" component={<LoginView />} />
+				<Route path="/register" component={<RegisterView />} />
+				<Route path="/forgot-password" component={<ForgotPasswordView />} />
+				<PrivateRoute path="/profile/:profileId" component={<ProfileView />}>
+					<PrivateRoute path="edit" component={<EditorView />} />
+				</PrivateRoute>
+				<Route path="*" element={<NotFoundView />} />
+			</Routes>
+		</BrowserRouter>
     );
   }
 
