@@ -1,36 +1,11 @@
 import { render } from '@testing-library/react';
-import { BehaviorSubject } from 'rxjs';
-import { authService } from './services/authService';
 import App from './App';
-
-jest.mock('./services/authService');
 
 describe('App unit tests', () => {
 
-    // Reinitializes the authService mock with the given principal.
-    // Principal can be null or { jwt: string, user: {} }
-    // TODO Make into a test helper? This is pretty common stuff for our tests!
-    const reinitAuthMock = (userPrincipal) => {
-        const currentUserSubject = new BehaviorSubject(JSON.stringify(userPrincipal));
-        return {
-            authService: {
-                login: jest.fn(),
-                logout: jest.fn(),
-                register: jest.fn(),
-                currentUser: currentUserSubject.asObservable(),
-                get currentUserValue() {
-                    return JSON.parse(currentUserSubject.value);
-                },
-                get currentUserId() {
-                    return JSON.parse(currentUserSubject.value)?.user?.id;
-                }
-            }
-        }
-    };
-
     beforeEach(() => {
         // TODO Swap this out if the model changes - how to avoid brittleness?
-        jest.setMock('./services/authService', reinitAuthMock({
+        const userPrincipal = {
             jwt: "test",
             user: {
                 id: 1,
@@ -46,21 +21,20 @@ describe('App unit tests', () => {
                     user: 1
                 }
             }
-        }));
+        };
+        // TODO - Provide useAuth() with this principal!
     });
 
     it('should default to the login page if not authenticated', () => {
         // given
         // - the user is not logged in
         //      > initialize authService to default values
-        jest.setMock('./services/authService', reinitAuthMock(null));
-
         // - the main page of the app is requested (/)
 
         
         // when
         // - the App component is initialized
-        render(<App />);
+        //render(<App />);
 
         // then
         // - we should arrive at the /login page

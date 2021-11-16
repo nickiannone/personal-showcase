@@ -1,9 +1,8 @@
-import { authService } from '../services/authService';
-
 export function authHeader() {
-    const currentUser = authService.currentUserValue;
-    if (currentUser && currentUser.jwt) {
-        return { Authorization: `Bearer ${currentUser.jwt}` };
+    const jwt = localStorage.getItem("jwt");
+
+    if (jwt) {
+        return { Authorization: `Bearer ${jwt}` };
     } else {
         return {};
     }

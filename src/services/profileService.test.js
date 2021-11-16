@@ -20,30 +20,30 @@ describe('profileService unit tests', () => {
         user: 1
     };
 
-    const currentUser = {
-        jwt: "test-jwt",
-        user: {
+    const jwt = "test-jwt";
+
+    const user = {
+        id: 1,
+        username: "app_user",
+        email: "test@example.com",
+        provider: "local",
+        confirmed: true,
+        blocked: false,
+        profile: {
             id: 1,
-            username: "app_user",
-            email: "test@example.com",
-            provider: "local",
-            confirmed: true,
-            blocked: false,
-            profile: {
-                id: 1,
-                display_name: "Test",
-                subtitle: "",
-                overview: "",
-                email_address: "test@example.com",
-                phone: "",
-                user: 1
-            }
+            display_name: "Test",
+            subtitle: "",
+            overview: "",
+            email_address: "test@example.com",
+            phone: "",
+            user: 1
         }
     };
 
     beforeEach(() => {
         // Set up the auth stuff so we're already logged in
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('jwt', jwt);
     });
 
     it('should get a profile correctly', async () => {
