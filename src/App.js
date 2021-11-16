@@ -1,7 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React from 'react';
 import './App.css';
+import { Link } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router';
 import LoginView from './views/login-view/LoginView';
+import { ProvideAuth, useAuth } from './services/useAuth';
 import PrivateRoute from './routing/PrivateRoute';
 
 const RegisterView = () => {
@@ -14,7 +17,12 @@ const ForgotPasswordView = () => {
 
 
 const LandingView = () => {
-	return <h1>TODO Landing Page</h1>;
+	return (
+		<div className="landing-wrapper">
+			<h1>TODO Landing Page</h1>
+			<Link to="/login">Log In</Link>
+		</div>
+	);
 };
 
 const NotFoundView = () => {
@@ -30,33 +38,42 @@ const ProfileView = () => {
 const EditorView = () => {
 	const {profileId} = useParams();
 
-	return <h1>Editor View for {profileId}</h1>
-}
+	return <h1>Editor View for {profileId}</h1>;
+};
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+const DashboardView = () => {
+	const auth = useAuth();
+	const navigate = useNavigate();
 
-    this.state = {};
-  }
+	const handleLogout = () => {
+		console.log("Logout clicked");
+		auth.logout().then(() => {
+			navigate("/login");
+		})
+	};
 
-  render() {
-    return (
-		<BrowserRouter>
-			<Routes>
-				<Route path="/" component={<LandingView />} />
-				<Route path="/login" component={<LoginView />} />
-				<Route path="/register" component={<RegisterView />} />
-				<Route path="/forgot-password" component={<ForgotPasswordView />} />
-				<PrivateRoute path="/profile/:profileId" component={<ProfileView />}>
-					<PrivateRoute path="edit" component={<EditorView />} />
-				</PrivateRoute>
-				<Route path="*" element={<NotFoundView />} />
-			</Routes>
-		</BrowserRouter>
+	return (
+		<div>
+			<h1>Dashboard View</h1>
+			<button onClick={handleLogout}>Log out</button>
+		</div>
+	);
+};
+
+function App() {
+	return (
+		<ProvideAuth>
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<LandingView />} />
+					<Route path="/login" element={<LoginView />} />
+					<Route element={<PrivateRoute />}>
+						<Route path="/dashboard" element={<DashboardView />} />
+					</Route>
+				</Routes>
+			</BrowserRouter>
+		</ProvideAuth>
     );
-  }
-
 }
 
 export default App;
