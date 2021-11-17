@@ -174,15 +174,11 @@ function ProfileView(props) {
         <div className="profile-view-wrapper">
             <Container className="profile-header">
                 <Toolbar position="fixed">
-                    <Typography>
-                        <h1 data-testid="display-name">{profile?.display_name}</h1>
-                        <h3 data-testid="subtitle">{profile?.subtitle}</h3>
-                    </Typography>
-                    <Toolbar>
-                        <div data-testid="email-address">{profile?.email_address}</div>
-                        <div data-testid="phone">{profile?.phone}</div>
-                        <div data-testid="links">{profileLinks}</div>
-                    </Toolbar>
+                    <h1 data-testid="display-name">{profile?.display_name}</h1>
+                    <h3 data-testid="subtitle">{profile?.subtitle}</h3>
+                    <div data-testid="email-address">Email: {profile?.email_address}</div>
+                    <div data-testid="phone">Phone: {profile?.phone}</div>
+                    <div data-testid="links">{profileLinks}</div>
                 </Toolbar>
             </Container>
             <Container>
