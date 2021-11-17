@@ -10,8 +10,6 @@ jest.mock('axios');
 
 describe('profileService unit tests', () => {
 
-
-
     const profile = {
         id: 1,
         display_name: "Test",

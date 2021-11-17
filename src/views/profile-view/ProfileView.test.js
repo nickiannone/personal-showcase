@@ -15,8 +15,8 @@ describe('Profile View unit tests', () => {
             display_name: "Nicholas Iannone",
             subtitle: "Software Engineer in Glendale, WI",
             overview: "Testing update!",
-            email_address: "nickiannone@gmail.com",
-            phone: "414-628-2734",
+            email_address: "test@example.com",
+            phone: "123-456-7890",
             user: 1
         };
 
@@ -31,7 +31,14 @@ describe('Profile View unit tests', () => {
         // - the subtitle is shown
         expect(screen.getByTestId("subtitle").innerHTML).toContain("Software Engineer");
 
-        // - the overview is shown
+        // - the email address is shown
+        expect(screen.getByTestId("email-address").innerHTML).toContain("test@example.com");
+
+        // - the phone number is shown
+        expect(screen.getByTestId("phone").innerHTML).toContain("123-456-7890");
+
+        // - the overview is shown (by default)
+        // TODO Remove this and put it in a different test!
         expect(screen.getByTestId("overview").innerHTML).toContain("Testing update!");
     });
 

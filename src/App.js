@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router';
 import LoginView from './views/login-view/LoginView';
 import { ProvideAuth, useAuth } from './services/useAuth';
 import PrivateRoute from './routing/PrivateRoute';
+import ProfileView from './views/profile-view/ProfileView';
 
 const RegisterView = () => {
 	return <h1>TODO Registration Page</h1>;
@@ -27,12 +28,6 @@ const LandingView = () => {
 
 const NotFoundView = () => {
 	return <h1>404 - Not Found</h1>;
-};
-
-const ProfileView = () => {
-	const { profileId } = useParams();
-
-	return <h1>Profile View for {profileId}</h1>;
 };
 
 const EditorView = () => {
@@ -69,6 +64,7 @@ function App() {
 					<Route path="/login" element={<LoginView />} />
 					<Route element={<PrivateRoute />}>
 						<Route path="/dashboard" element={<DashboardView />} />
+						<Route path="/profile/:profileId" element={<ProfileView />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>

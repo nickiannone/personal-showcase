@@ -32,9 +32,9 @@ const LoginView = (props) => {
 
         // TODO form.validateAll();
 
-        return auth.login(email, password).then(() => {
+        return auth.login(email, password).then((user) => {
             console.log("logged in, redirecting...");
-            navigate("/dashboard");
+            navigate(`/profile/${user.profile.id}`);
         }, error => {
             console.log("failed to authenticate!");
             setLoading(false);
