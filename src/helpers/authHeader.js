@@ -1,9 +1,10 @@
-export function authHeader() {
-    const jwt = localStorage.getItem("jwt");
+import { getJWT } from '../services/useAuth';
 
+export function authHeader() {
+    const jwt = getJWT();
     if (jwt) {
         return { Authorization: `Bearer ${jwt}` };
     } else {
         return {};
     }
-}
+};

@@ -8,6 +8,13 @@ export const useAuth = () => {
     return useContext(authContext);
 };
 
+export const getUser = () => {
+    return JSON.parse(localStorage.getItem("user"));
+};
+export const getJWT = () => {
+    return localStorage.getItem("jwt");
+};
+
 function useProvideAuth() {
 
     // Swap these out later with something else?
@@ -18,12 +25,6 @@ function useProvideAuth() {
     const clearUserPrincipal = () => {
         localStorage.removeItem("user");
         localStorage.removeItem("jwt");
-    };
-    const getUser = () => {
-        return JSON.parse(localStorage.getItem("user"));
-    };
-    const getJWT = () => {
-        return localStorage.getItem("jwt");
     };
 
     const login = async (email, password) => {
