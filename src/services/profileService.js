@@ -12,15 +12,12 @@ function getUserId(profile) {
 }
 
 async function getProfile(profileId) {
-    console.log("Fetching profile ID " + profileId);
     const response = await axios.get(`${API_BASE_URL}/profiles/${profileId}`, {
         headers: authHeader()
     });
     if (response?.data?.id) {
-        console.log("Retrieved profile: " + JSON.stringify(response.data));
         return response.data;
     } else {
-        console.log("Failed to retrieve profile! Response: " + JSON.stringify(response));
         return null;
     }
 }
