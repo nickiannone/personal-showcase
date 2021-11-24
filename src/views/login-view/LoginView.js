@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../../services/useAuth';
+import { Link } from 'react-router-dom';
 
 const LoginView = (props) => {
     const navigate = useNavigate();
@@ -22,6 +23,7 @@ const LoginView = (props) => {
     const clearInputs = () => {
         setEmail("");
         setPassword("");
+        setMessage("");
     }
 
     const handleLogin = (e) => {
@@ -58,9 +60,11 @@ const LoginView = (props) => {
                         name="password"
                         type="password"
                         placeholder="Password" />
-                <button type="reset" onClick={clearInputs}>Reset</button>
                 <span data-testid="error">{message}</span>
+                <button type="reset" onClick={clearInputs}>Reset</button>
                 <button type="submit">Submit</button>
+                <Link data-testid="register-link" to="/register">Register</Link>
+                <Link data-testid="forgot-password-link" to="/forgot-password">Forgot password?</Link>
             </form>
         </div>
     );
