@@ -73,7 +73,6 @@ describe('Profile View unit tests', () => {
         // given
         // - a profile is loaded
         // - a user is logged in
-        // - 
         
         // when
         // - the component is initialized

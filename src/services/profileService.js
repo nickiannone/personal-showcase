@@ -4,9 +4,11 @@ import { authHeader } from '../helpers/authHeader';
 
 export const profileService = {
     getProfile,
-    updateProfile
+    updateProfile,
+    getUserId
 };
 
+// Helper to get us the user ID of a profile
 function getUserId(profile) {
     return Number.isInteger(profile.user) ? profile.user : profile.user.id;
 }
